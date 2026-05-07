@@ -4,13 +4,15 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const db = require('./src/config/db');
+const fs = require('fs');
 
 // Importación de rutas
 const authRoutes = require('./src/routes/authRoutes');
 const productosRoutes = require('./src/routes/productosRoutes');
 const categoriaRoutes = require('./src/routes/categoriaRoutes');
-const proveedorRoutes = require('./src/routes/proveedorRoutes'); // Asegúrate de que este archivo exista
+const proveedorRoutes = require('./src/routes/proveedorRoutes');
+const ventasRoutes = require('./src/routes/ventasRoutes');
+const clientesRoutes = require('./src/routes/clientesRoutes'); 
 
 const app = express();
 
@@ -18,25 +20,41 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// --- Carpeta Pública para Imágenes ---
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// --- 3. Configuración de Carpetas Estáticas ---
 
-// 3. Verificación de conexión a la Base de Datos
+// Carpeta para imágenes de productos (asegúrate de que exista)
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
+
+app.use('/uploads', express.static(uploadsDir));
+
+// Carpeta específica para los Vauchers PDF
+// Esto permite acceder via: http://localhost:3001/vauchers/vaucher_1.pdf
+const pdfDir = path.join(__dirname, 'uploads/pdf');
+if (!fs.existsSync(pdfDir)) {
+    fs.mkdirSync(pdfDir, { recursive: true });
+}
+
+app.use('/vauchers', express.static(pdfDir));
+
+
+// 4. Verificación de conexión a la Base de Datos (Informativo)
 console.log('--- Intentando conectar a la Base de Datos ---');
 
-// 4. Definición de Rutas (ORDENADAS PARA EVITAR CONFLICTOS)
-// Cada módulo tiene su propio prefijo claro
+// 5. Definición de Rutas
 app.use('/api/auth', authRoutes);
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/proveedores', proveedorRoutes);
 app.use('/api/productos', productosRoutes);
+app.use('/api/ventas', ventasRoutes);  
+app.use('/api/clientes', clientesRoutes);
 
 // Ruta de prueba rápida
 app.get('/', (req, res) => {
     res.send('API STORESTOCK funcionando correctamente 🚀');
 });
 
-// 5. Manejo de rutas no encontradas (404)
+// 6. Manejo de rutas no encontradas (404)
 app.use((req, res) => {
     res.status(404).json({
         ok: false,
@@ -44,24 +62,24 @@ app.use((req, res) => {
     });
 });
 
-// 6. Manejo de errores global
+// 7. Manejo de errores global
+// He mejorado esto para que te devuelva el error real del PDF si falla
 app.use((err, req, res, next) => {
-    console.error('❌ Error no controlado:', err.stack);
-    res.status(500).json({
+    console.error('❌ Error detectado:', err);
+    res.status(err.status || 500).json({
         ok: false,
-        message: 'Algo salió mal en el servidor',
-        error: err.message
+        message: err.message || 'Algo salió mal en el servidor',
+        error: process.env.NODE_ENV === 'development' ? err.stack : {}
     });
 });
 
-// 7. Lanzamiento del servidor
+// 8. Lanzamiento del servidor
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
     console.log(`\n==========================================`);
     console.log(`🚀 SERVIDOR CORRIENDO EN: http://localhost:${PORT}`);
     console.log(`📡 BASE DE DATOS: ${process.env.DB_NAME}`);
-    console.log(`👤 USUARIO BD: ${process.env.DB_USER}`);
-    console.log(`🏠 HOST: ${process.env.DB_HOST}`);
+    console.log(`📂 RUTA PDF: ${pdfDir}`);
     console.log(`==========================================\n`);
 });
