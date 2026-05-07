@@ -26,6 +26,15 @@ function Navegador() {
                         <span>Categorias</span>
                     </Link>
                 </li>
+                <li className="listaNav">
+                    <Link
+                        to="/panel/proveedores"
+                        className={`linkNav ${location.pathname === "/panel/proveedores" ? "active" : ""}`}
+                    >
+                        <i className="bi bi-people"></i>
+                        <span>Proveedores</span>
+                    </Link>
+                </li>
 
                 <li className="listaNav">
                     <Link
