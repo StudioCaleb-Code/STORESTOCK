@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./src/routes/authRoutes');
+const productosRoutes = require('./src/routes/productosRoutes');
 const db = require('./src/config/db'); // Importamos la conexión para verificarla
 
 const app = express();
@@ -18,6 +19,7 @@ console.log('--- Intentando conectar a la Base de Datos ---');
 
 // 4. Definición de Rutas
 app.use('/api/auth', authRoutes);
+app.use('/api/productos', productosRoutes);
 
 // Ruta de prueba rápida (opcional)
 app.get('/', (req, res) => {
