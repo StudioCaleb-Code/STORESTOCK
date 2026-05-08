@@ -13,7 +13,7 @@ const Login = () => {
 
         try {
             // Mandamos los datos a tu backend con MySQL
-            const response = await fetch('http://localhost:3001/api/auth/login', {
+            const response = await fetch('https://storestock.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -27,11 +27,11 @@ const Login = () => {
             if (response.ok && data.ok) {
                 // Guardamos los datos del usuario en el navegador por si tu panel los usa
                 localStorage.setItem('user', JSON.stringify(data.user));
-                
+
                 alert('¡Bienvenido a STORESTOCK!');
-                
+
                 // REDIRECCIÓN OBLIGATORIA AL PANEL GENERAL
-                navigate('/panel'); 
+                navigate('/panel');
             } else {
                 alert('Error: ' + (data.message || 'Credenciales incorrectas'));
             }

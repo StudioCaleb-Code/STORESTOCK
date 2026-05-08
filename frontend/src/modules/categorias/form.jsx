@@ -18,7 +18,7 @@ function FormularioCategoria() {
         if (id) {
             const obtenerCategoria = async () => {
                 try {
-                    const res = await fetch(`http://localhost:3001/api/categorias/${id}`);
+                    const res = await fetch(`https://storestock.onrender.com/api/categorias/${id}`);
                     if (res.ok) {
                         const data = await res.json();
                         setCategoria({
@@ -49,8 +49,8 @@ function FormularioCategoria() {
         
         // La URL depende de si el ID existe (PUT) o no (POST)
         const url = id 
-            ? `http://localhost:3001/api/categorias/${id}` 
-            : `http://localhost:3001/api/categorias`;
+            ? `https://storestock.onrender.com/api/categorias/${id}` 
+            : `https://storestock.onrender.com/api/categorias`;
             
         const method = id ? "PUT" : "POST";
 

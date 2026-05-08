@@ -15,7 +15,7 @@ function FormularioProveedor() {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:3001/api/proveedores/${id}`)
+            fetch(`https://storestock.onrender.com/api/proveedores/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data) setProveedor(data);
@@ -30,7 +30,7 @@ function FormularioProveedor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = id ? `http://localhost:3001/api/proveedores/${id}` : `http://localhost:3001/api/proveedores`;
+        const url = id ? `https://storestock.onrender.com/api/proveedores/${id}` : `https://storestock.onrender.com/api/proveedores`;
         const method = id ? "PUT" : "POST";
 
         try {

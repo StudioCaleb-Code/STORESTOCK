@@ -78,7 +78,7 @@ const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
     console.log(`\n==========================================`);
-    console.log(`🚀 SERVIDOR CORRIENDO EN: http://localhost:${PORT}`);
+    console.log(`🚀 SERVIDOR CORRIENDO EN: https://storestock.onrender.com:${PORT}`);
     console.log(`📡 BASE DE DATOS: ${process.env.DB_NAME}`);
     console.log(`📂 RUTA PDF: ${pdfDir}`);
     console.log(`==========================================\n`);

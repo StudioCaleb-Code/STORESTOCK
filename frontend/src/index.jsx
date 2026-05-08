@@ -6,7 +6,7 @@ function IndexPublic() {
     const [carritoCount, setCarritoCount] = useState(0);
 
     useEffect(() => {
-        fetch("http://localhost:3001/api/productos")
+        fetch("https://storestock.onrender.com/api/productos")
             .then(res => res.json())
             .then(data => setProductos(data))
             .catch(err => console.error("Error:", err));
@@ -56,7 +56,7 @@ function IndexPublic() {
                             <div key={p.id_producto} style={styles.card}>
                                 <div style={styles.imgContainer}>
                                     <img 
-                                        src={`http://localhost:3001/uploads/${p.imagen_principal || 'default.png'}`} 
+                                        src={`https://storestock.onrender.com/uploads/${p.imagen_principal || 'default.png'}`} 
                                         alt={p.nombre} 
                                         style={styles.img}
                                     />

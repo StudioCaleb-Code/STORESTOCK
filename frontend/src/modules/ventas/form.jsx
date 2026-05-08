@@ -15,12 +15,12 @@ function FormularioVenta() {
 
     useEffect(() => {
         // Cargar clientes y productos al iniciar
-        fetch("http://localhost:3001/api/clientes")
+        fetch("https://storestock.onrender.com/api/clientes")
             .then(res => res.json())
             .then(data => setClientes(data))
             .catch(err => console.error("Error clientes:", err));
 
-        fetch("http://localhost:3001/api/productos")
+        fetch("https://storestock.onrender.com/api/productos")
             .then(res => res.json())
             .then(data => setProductos(data))
             .catch(err => console.error("Error productos:", err));
@@ -126,7 +126,7 @@ function FormularioVenta() {
         };
 
         try {
-            const response = await fetch("http://localhost:3001/api/ventas", {
+            const response = await fetch("https://storestock.onrender.com/api/ventas", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(ventaData)

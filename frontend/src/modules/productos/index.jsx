@@ -9,7 +9,7 @@ function Productos() {
         const fetchProductos = async () => {
             try {
                 // Asegúrate de que tu backend esté corriendo en el puerto 3001
-                const response = await fetch('http://localhost:3001/api/productos');
+                const response = await fetch('https://storestock.onrender.com/api/productos');
                 const data = await response.json();
                 setLista(data);
             } catch (error) {

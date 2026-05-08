@@ -7,7 +7,7 @@ function IndexCategorias() {
 
     const cargarCategorias = async () => {
         try {
-            const res = await fetch('http://localhost:3001/api/categorias');
+            const res = await fetch('https://storestock.onrender.com/api/categorias');
             const data = await res.json();
             setCategorias(data);
         } catch (err) {

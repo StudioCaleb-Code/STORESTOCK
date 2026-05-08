@@ -7,7 +7,7 @@ function IndexProveedores() {
 
     const cargarProveedores = async () => {
         try {
-            const res = await fetch('http://localhost:3001/api/proveedores');
+            const res = await fetch('https://storestock.onrender.com/api/proveedores');
             if (res.ok) {
                 const data = await res.json();
                 setProveedores(data);

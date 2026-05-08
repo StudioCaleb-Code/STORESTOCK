@@ -24,8 +24,8 @@ function FormularioProducto() {
             try {
                 // 1. MEJORA: Peticiones con manejo individual para evitar bloqueo total
                 const [resCat, resProv] = await Promise.all([
-                    fetch('http://localhost:3001/api/categorias').catch(() => null),
-                    fetch('http://localhost:3001/api/proveedores').catch(() => null)
+                    fetch('https://storestock.onrender.com/api/categorias').catch(() => null),
+                    fetch('https://storestock.onrender.com/api/proveedores').catch(() => null)
                 ]);
 
                 if (resCat && resCat.ok) {
@@ -40,7 +40,7 @@ function FormularioProducto() {
 
                 // 2. Cargar producto si estamos en modo edición
                 if (id) {
-                    const resProd = await fetch(`http://localhost:3001/api/productos/${id}`);
+                    const resProd = await fetch(`https://storestock.onrender.com/api/productos/${id}`);
                     if (resProd.ok) {
                         const data = await resProd.json();
                         // Importante: Asegurar que los campos no sean null para que los inputs no fallen
@@ -53,7 +53,7 @@ function FormularioProducto() {
                             stock: data.stock || ""
                         });
                         if (data.imagen_principal) {
-                            setPreview(`http://localhost:3001/uploads/${data.imagen_principal}`);
+                            setPreview(`https://storestock.onrender.com/uploads/${data.imagen_principal}`);
                         }
                     }
                 }
@@ -85,7 +85,7 @@ function FormularioProducto() {
         });
         if (file) formData.append("imagen", file);
 
-        const url = id ? `http://localhost:3001/api/productos/${id}` : `http://localhost:3001/api/productos`;
+        const url = id ? `https://storestock.onrender.com/api/productos/${id}` : `https://storestock.onrender.com/api/productos`;
         const method = id ? "PUT" : "POST";
 
         try {

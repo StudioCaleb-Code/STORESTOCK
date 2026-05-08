@@ -8,7 +8,7 @@ function IndexVentas() {
 
     // Función para obtener las ventas desde el backend
     const obtenerVentas = () => {
-        fetch("http://localhost:3001/api/ventas")
+        fetch("https://storestock.onrender.com/api/ventas")
             .then(res => {
                 if (!res.ok) throw new Error("Error en el servidor");
                 return res.json();
@@ -67,7 +67,7 @@ function IndexVentas() {
                                     <td className="text-center">
                                         {v.nombre_archivo_vaucher ? (
                                             <a 
-                                                href={`http://localhost:3001/vauchers/${v.nombre_archivo_vaucher}`} 
+                                                href={`https://storestock.onrender.com/vauchers/${v.nombre_archivo_vaucher}`} 
                                                 target="_blank" 
                                                 rel="noreferrer"
                                                 className="btn-pdf"
