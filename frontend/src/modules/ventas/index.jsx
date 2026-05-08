@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function IndexVentas() {
     // Inicializar con array vacío para evitar errores de .map
-    const [ventas, setVentas] = useState([]); 
+    const [ventas, setVentas] = useState([]);
     const navigate = useNavigate();
 
     // Función para obtener las ventas desde el backend
@@ -66,9 +66,9 @@ function IndexVentas() {
                                     </td>
                                     <td className="text-center">
                                         {v.nombre_archivo_vaucher ? (
-                                            <a 
-                                                href={`https://storestock.onrender.com/vauchers/${v.nombre_archivo_vaucher}`} 
-                                                target="_blank" 
+                                            <a
+                                                href={`https://storestock.onrender.com/vauchers/${v.nombre_archivo_vaucher}`}
+                                                target="_blank"
                                                 rel="noreferrer"
                                                 className="btn-pdf"
                                                 style={{
