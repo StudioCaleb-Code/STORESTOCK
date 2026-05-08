@@ -11,8 +11,7 @@ function IndexPublic() {
             .then(data => setProductos(data))
             .catch(err => console.error("Error:", err));
 
-        const savedCart = JSON.parse(localStorage.getItem('carrito_publico')) || [];
-        setCarritoCount(savedCart.length);
+        const savedCart = JSON.parse(localStorage.getItem('carrito_publico')) || []; setCarritoCount(savedCart.length);
     }, []);
 
     const agregarAlCarrito = (p) => {
