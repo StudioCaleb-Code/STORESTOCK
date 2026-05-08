@@ -6,7 +6,7 @@ import Carrito from './pages/carrito'; // Asegúrate de que el archivo se llame 
 
 // AUTENTICACIÓN (src/auth/...)
 import Login from './auth/login';
-import Register from './auth/register';
+import Register from './auth/Register';
 
 // PANEL Y MÓDULOS (Administración)
 import Panel from './panel/panel';
